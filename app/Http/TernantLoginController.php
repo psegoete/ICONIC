@@ -176,11 +176,11 @@ class TernantLoginController extends Controller
             'footer' => $company->company_name .' - '. $company->city .' - '. $company->province .', '.$company->country,
         ];
         
-        Mail::send('emails.customer_registration', ['data' => $data], function ($m) use ($data) {
-            $m->from($data['from'], $data['company_name']);
+        // Mail::send('emails.customer_registration', ['data' => $data], function ($m) use ($data) {
+        //     $m->from($data['from'], $data['company_name']);
 
-            $m->to($data['email'], $data['company_name'])->subject($data['customer_subject']);
-        });
+        //     $m->to($data['email'], $data['company_name'])->subject($data['customer_subject']);
+        // });
 
         $mail_history = new MailHistory([
             'seen' => 0,
@@ -198,11 +198,11 @@ class TernantLoginController extends Controller
         ]);
         $mail_history->save();
 
-        Mail::send('emails.customer_activation', ['data' => $data], function ($m) use ($data) {
-            $m->from($data['from'], $data['company_name']);
+        // Mail::send('emails.customer_activation', ['data' => $data], function ($m) use ($data) {
+        //     $m->from($data['from'], $data['company_name']);
 
-            $m->to($data['admin_email'], $data['company_name'])->subject($data['admin_subject']);
-        });
+        //     $m->to($data['admin_email'], $data['company_name'])->subject($data['admin_subject']);
+        // });
 
         $mail_history = new MailHistory([
             'seen' => 0,

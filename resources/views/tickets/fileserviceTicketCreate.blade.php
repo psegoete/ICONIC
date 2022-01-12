@@ -124,7 +124,7 @@
                                 <p>{{ $file_service->id }}</p>
                             </div>
                             <div class="col-md-6">
-                                <strong>Tunner</strong>
+                                <strong>Tuner</strong>
                                 <p>{{ $tunner->first_name }} {{ $tunner->last_name }}</p>
                             </div>
                         </div>

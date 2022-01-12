@@ -304,7 +304,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <strong>Tunner</strong>
+                                    <strong>Tuner</strong>
                                     <p>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
                                 </div>
                             </div>
