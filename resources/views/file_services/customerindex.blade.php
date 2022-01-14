@@ -3,7 +3,6 @@
 <li class='breadcrumb-item '>File services</li>
 @endsection
 @section('content')
-
 <div class="clearfix">
     <div class="col-lg">
         <div class="card">
@@ -112,44 +111,8 @@
 <li class='breadcrumb-item '>File services</li>
 @endsection
 @section('content')
-<div class="row">
-    <div class="col-md-12">
 
-        @foreach($data as $file_service)
 
-        @if($file_service->viewed_by_customer == 0)
-        <div class = "modal fade bd-example-modal-sm" tabindex = "-1" 
-           role = "dialog" aria-labelledby = "mySmallModalLabel" aria-hidden = "true">
-           <div class = "modal-dialog modal-sm">
-              <div class = "modal-content">
-                 
-                 <div class = "modal-header">
-                    <h5 class = "modal-title" id = "exampleModalLabel">Message from tuner</h5>
-                    <button type = "button" class = "close" data-dismiss = "modal" aria-label = "Close">
-                    <span aria-hidden = "true">×</span>
-                    </button>
-                 </div>
-                 
-                 <div class = "modal-body">
-                    {{$file_service->note_to_customer}}
-                    <a href="{{ url('file_services/'.$file_service->id) }}" class="text-nowrap font-weight-600">See details</a>
-                 </div>
-                 
-                 <div class = "modal-footer">
-                    <button type = "button" class = "btn btn-danger" 
-                       data-dismiss = "modal">Close</button>
-                    <!-- <button type = "button" class = "btn btn-success">Save</button> -->
-                 </div>
-                 
-              </div>
-           </div>
-        </div>
-     </div>
-        @endif
-         
-        @endforeach
-    </div>
-</div>
 <div class="row">
     <div class="col-12">
         <div class="row">
@@ -244,6 +207,9 @@
         </div>
     </div>
 </div>
+@endsection
+
+
 @section('scripts')
 <script type="text/javascript">
 
@@ -284,40 +250,7 @@
                             link4 = "<a href='' class='btn btn-info' data-id='full->id' title=Edit'><i class='fa fa-edit'></i> </a>";
                         }
 
-                    //     if(full.viewed_by_customer == 0){
-                    //         window.confirm = function() { return false; };
-                    //   $.confirm({
-                    // title: 'Confirm!',
-                    // content: 'Are you sure want to delete and refund credits!'+full.viewed_by_customer,
-                    // buttons: {
-                    //     no: function () {
-                        
-                    //     },
-                    //     yes: {
-                    //         text: 'yes',
-                    //         btnClass: 'btn-red',
-                    //         keys: ['enter', 'shift'],
-                    //         action: function(){
-                    //             // $.ajax({
-                    //             //     type: "GET",
-                    //             //     url: "/refund/"+file_service_id,
-                    //             //     data: {
-                    //             //     "id": file_service_id,
-                    //             //     "_token": token,
-                    //             //     },
-                    //             //     success: function (data) {
-                    //             //         location.reload(true);
-                    //             //     var table = $('.data-table').DataTable();
-                            
-                    //             //     table.ajax.reload();           },
-                    //             //     error: function (data) {
-                    //             //     }
-                    //             //     });
-                    //         }
-                    //     }
-                    //     }
-                    // });
-                    //     }
+
 
                         return link4 +' '+link+' '+link2;
                     },
@@ -363,11 +296,5 @@
 
             
             });
-
-            $(window).on('load', function() {
-                $('.bd-example-modal-sm').modal('show');
-            });
     </script>
 @stop
-@endsection
-

@@ -84,7 +84,7 @@ class FileServicesController extends Controller
             $waiting = FileService::where([['status', '=', 'waiting'], ['company_id', '=', checkDomain()], ['file_services.user_id', '=', auth::user()->id]])->count();
             $completed = FileService::where([['status', '=', 'completed'], ['company_id', '=', checkDomain()], ['file_services.user_id', '=', auth::user()->id]])->count();
             $all = FileService::where([['company_id', '=', checkDomain()], ['file_services.user_id', '=', auth::user()->id]])->count();
-            
+            if ($request->ajax()) {
                 if ($request->input('search')) {
 
                     $data =  DB::table('file_services')->where([['file_services.company_id', '=', checkDomain()], ['file_services.user_id', '=', auth::user()->id], ['file_services.status', '=', $request->input('search')]])
@@ -107,9 +107,7 @@ class FileServicesController extends Controller
                             'file_services.dynograph_title',
                             'file_services.modified',
                             'file_services.modified_title',
-                            'file_services.status',
-                            'file_services.viewed_by_customer',
-                            'file_services.note_to_customer',
+                            'file_services.status'
                         )
                         ->get();
                 } else {
@@ -134,16 +132,13 @@ class FileServicesController extends Controller
                             'file_services.dynograph_title',
                             'file_services.modified',
                             'file_services.modified_title',
-                            'file_services.status',
-                            'file_services.viewed_by_customer',
-                            'file_services.note_to_customer'
+                            'file_services.status'
                         )
                         ->get();
-                    }
-                    if ($request->ajax()) {
-                        return response()->json(['data' => $data]);
-                    }
-            return view('file_services.customerindex', compact('open', 'completed', 'waiting', 'all','data'));
+                }
+                return response()->json(['data' => $data]);
+            }
+            return view('file_services.customerindex', compact('open', 'completed', 'waiting', 'all'));
         }
     }
 
@@ -487,11 +482,11 @@ class FileServicesController extends Controller
 
 
 
-        Mail::send('emails.new_file_service', ['data' => $data], function ($m) use ($data) {
-            $m->from($data['from'], $data['company_name']);
+        // Mail::send('emails.new_file_service', ['data' => $data], function ($m) use ($data) {
+        //     $m->from($data['from'], $data['company_name']);
 
-            $m->to($data['admin_email'], $data['company_name'])->subject('New file service has been submitted');
-        });
+        //     $m->to($data['admin_email'], $data['company_name'])->subject('New file service has been submitted');
+        // });
         
         $devices = UserDevice::where([['user_id', '=', $admin->id], ['company_id', '=', checkDomain()]])->get();
 
@@ -532,10 +527,6 @@ class FileServicesController extends Controller
     public function show($id)
     {
         $file_service = FileService::where([['id', '=', $id], ['user_id', Auth::user()->id], ['company_id', '=', checkDomain()]])->firstOrFail();
-        if($file_service->viewed_by_customer == 0){
-            $file_service->viewed_by_customer = 1;
-            $file_service->save();
-        }
         return view('file_services.show', compact('file_service'));
     }
 
@@ -606,12 +597,6 @@ class FileServicesController extends Controller
                 'dyno' => 'required',
             ]);
         }
-        if (Auth::user()->role == 'admin'){
-            if($request->input('note_to_customer')){
-                $file_service->note_to_customer = $request->input('note_to_customer');
-                $file_service->viewed_by_customer = 0;
-            }
-        }
 
         $customer = User::where([['id', '=', $file_service->user_id], ['company_id', '=', checkDomain()]])->firstOrFail();
         $company = Company::where('id', '=', \checkDomain())->firstOrFail();
@@ -677,11 +662,11 @@ class FileServicesController extends Controller
                     'car' =>  $file_service->make . ' ' . $file_service->model . ' ' . $file_service->generation . ' ' . $file_service->engine,
                 ];
 
-                Mail::send('emails.completed_file_service', ['data' => $data], function ($m) use ($data) {
-                    $m->from($data['from'], $data['company_name']);
+                // Mail::send('emails.completed_file_service', ['data' => $data], function ($m) use ($data) {
+                //     $m->from($data['from'], $data['company_name']);
 
-                    $m->to($data['email'], $data['company_name'])->subject('Your file service is ready!');
-                });
+                //     $m->to($data['email'], $data['company_name'])->subject('Your file service is ready!');
+                // });
                 
                 $devices = UserDevice::where([['user_id', '=', $customer->id], ['company_id', '=', checkDomain()]])->get();
 
@@ -716,11 +701,11 @@ class FileServicesController extends Controller
                 'car' =>  $file_service->make . ' ' . $file_service->model . ' ' . $file_service->generation . ' ' . $file_service->engine,
             ];
 
-            Mail::send('emails.completed_file_service', ['data' => $data], function ($m) use ($data) {
-                $m->from($data['from'], $data['company_name']);
+            // Mail::send('emails.completed_file_service', ['data' => $data], function ($m) use ($data) {
+            //     $m->from($data['from'], $data['company_name']);
 
-                $m->to($data['email'], $data['company_name'])->subject('Your file service is ready!');
-            });
+            //     $m->to($data['email'], $data['company_name'])->subject('Your file service is ready!');
+            // });
             
             $devices = UserDevice::where([['user_id', '=', $customer->id], ['company_id', '=', checkDomain()]])->get();
 

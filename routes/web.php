@@ -24,7 +24,7 @@ Route::get('model/generation/{model_id}', 'makeControllers@generation');
 Route::get('generation/engine/{model_id}', 'makeControllers@engine');
 // Route::get('generation/engine/{generation_id}/{engine_id}/{code}/{name}/{fuel_type}/{power}/{torgue}/{flag}', 'makeControllers@generationEngine');
 
-Route::group(['domain' => 'localhost'], function () {
+Route::group(['domain' => '127.0.0.11'], function () {
     Route::get('/', 'CompaniesController@create')->name('/companies/create')->middleware(['checkrole']);
     Route::get('/admin/login', 'SuperLoginController@login')->middleware(['checkrole']);
     Route::post('admin-login', 'SuperLoginController@adminLogin');

@@ -37,7 +37,5 @@ class FileService extends Model
         'file_to_modify_title',
         'notes',
         'downloaded_file_service',
-        'note_to_customer',
-        'viewed_by_customer',
     ];
 }
