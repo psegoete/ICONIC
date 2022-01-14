@@ -57,8 +57,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <strong>Info</strong>
-                        <p>{{ $file_service->timefinforrame }}</p>
+                        <strong>Message from tuner</strong>
+                        <p>{{ $file_service->note_to_customer }}</p>
                     </div>
                 </div>
                 <div class="row">

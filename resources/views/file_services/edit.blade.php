@@ -177,14 +177,14 @@
                                 </div>
                             </div>
     
-                            <div class="form-group{{ $errors->has('notes') ? ' has-error' : '' }} row">
+                            <div class="form-group{{ $errors->has('note_to_customer') ? ' has-error' : '' }} row">
                                 <div class="col-md-12">
-                                    <label for="notes" class="col-form-label form-control-label">Message</label>
-                                    <textarea rows="4" id="notes" class="form-control" name="notes">{{ old('notes',$file_service->notes) }}</textarea>
+                                    <label for="note_to_customer" class="col-form-label form-control-label">Message</label>
+                                    <textarea rows="4" id="note_to_customer" class="form-control" name="note_to_customer">{{ old('note_to_customer') }}</textarea>
                 
-                                    @if ($errors->has('notes'))
+                                    @if ($errors->has('note_to_customer'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('notes') }}</strong>
+                                        <strong>{{ $errors->first('note_to_customer') }}</strong>
                                     </span>
                                     @endif
                                 </div>
