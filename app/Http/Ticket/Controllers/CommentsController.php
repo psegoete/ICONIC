@@ -142,11 +142,11 @@ class CommentsController extends Controller
 
                 }
             }
-            // Mail::send('emails.updated_support_ticket', ['data' => $data], function ($m) use ($data) {
-            //     $m->from($data['from'], $data['company_name']);
+            Mail::send('emails.updated_support_ticket', ['data' => $data], function ($m) use ($data) {
+                $m->from($data['from'], $data['company_name']);
 
-            //     $m->to($data['admin_email'], $data['company_name'])->subject('A ticket has been updated');
-            // });
+                $m->to($data['admin_email'], $data['company_name'])->subject('A ticket has been updated');
+            });
 
             $mail_history = new MailHistory([
                 'seen' => 0,
@@ -216,11 +216,11 @@ class CommentsController extends Controller
                     pushNotification($value->device_id, $ticket->subject, auth()->user()->name . ' - ' . $categories->name);
                 }
             }
-            // Mail::send('emails.customer_updated_support_ticket', ['data' => $data], function ($m) use ($data) {
-            //     $m->from($data['from'], $data['company_name']);
+            Mail::send('emails.customer_updated_support_ticket', ['data' => $data], function ($m) use ($data) {
+                $m->from($data['from'], $data['company_name']);
 
-            //     $m->to($data['email'], $data['company_name'])->subject('Your ticket has been updated');
-            // });
+                $m->to($data['email'], $data['company_name'])->subject('Your ticket has been updated');
+            });
 
             $mail_history = new MailHistory([
                 'seen' => 0,
@@ -265,11 +265,11 @@ class CommentsController extends Controller
                     pushNotification($value->device_id, $ticket->subject.' '.'The ticket has been closed.', auth()->user()->name . ' - ' . $categories->name);
             }
 
-            // Mail::send('emails.close_support_ticket', ['data' => $data], function ($m) use ($data) {
-            //     $m->from($data['from'], $data['company_name']);
+            Mail::send('emails.close_support_ticket', ['data' => $data], function ($m) use ($data) {
+                $m->from($data['from'], $data['company_name']);
 
-            //     $m->to($data['email'], $data['company_name'])->subject('A ticket has been closed');
-            // });
+                $m->to($data['email'], $data['company_name'])->subject('A ticket has been closed');
+            });
 
             $mail_history = new MailHistory([
                 'seen' => 0,

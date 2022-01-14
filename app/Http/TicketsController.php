@@ -510,11 +510,11 @@ class TicketsController extends Controller
                 'message' =>  $request->input('message'),
             ];
 
-            // Mail::send('emails.new_support_ticket', ['data' => $data], function ($m) use ($data) {
-            //     $m->from($data['from'], $data['company_name']);
+            Mail::send('emails.new_support_ticket', ['data' => $data], function ($m) use ($data) {
+                $m->from($data['from'], $data['company_name']);
 
-            //     $m->to($data['admin_email'], $data['company_name'])->subject('New file service');
-            // });
+                $m->to($data['admin_email'], $data['company_name'])->subject('New file service');
+            });
 
             $devices = UserDevice::where([['user_id', '=', $admin->id], ['company_id', '=', checkDomain()]])->get();
 
@@ -564,11 +564,11 @@ class TicketsController extends Controller
                 'message' =>  $request->input('message'),
             ];
 
-            // Mail::send('emails.new_customer_ticket', ['data' => $data], function ($m) use ($data) {
-            //     $m->from($data['from'], $data['company_name']);
+            Mail::send('emails.new_customer_ticket', ['data' => $data], function ($m) use ($data) {
+                $m->from($data['from'], $data['company_name']);
 
-            //     $m->to($data['admin_email'], $data['company_name'])->subject('New file service');
-            // });
+                $m->to($data['admin_email'], $data['company_name'])->subject('New file service');
+            });
 
 
             $mail_history = new MailHistory([

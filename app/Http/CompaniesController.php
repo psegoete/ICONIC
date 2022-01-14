@@ -291,11 +291,11 @@ class CompaniesController extends Controller
                 'basic' => $basic,
             ];
 
-            // Mail::send('emails.company_registration', ['data' => $data], function ($m) use ($data) {
-            //     $m->from($data['iconic_email'], $data['company_name']);
+            Mail::send('emails.company_registration', ['data' => $data], function ($m) use ($data) {
+                $m->from($data['iconic_email'], $data['company_name']);
 
-            //     $m->to($data['email'], $data['company_name'])->subject($data['subject']);
-            // });
+                $m->to($data['email'], $data['company_name'])->subject($data['subject']);
+            });
 
             $payment =  DB::table('payment_getaways')->where([['payment_provider', '=', 'payfast'], ['companyid', '=', 0]])->orderBy('updated_at', 'desc')->get()[0];
             $company->uuid = 'processing';

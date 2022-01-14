@@ -70,7 +70,7 @@
                                 <p>{{ $file_service->id }}</p>
                             </div>
                             <div class="col-md-6">
-                                <strong>Tuner</strong>
+                                <strong>Tunner</strong>
                                 <p>{{ $tunner->first_name }} {{ $tunner->last_name }}</p>
                             </div>
                         </div>
