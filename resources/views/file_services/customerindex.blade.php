@@ -117,7 +117,7 @@
 
         @foreach($data as $file_service)
 
-        @if($file_service->viewed_by_customer == 0)
+        @if($file_service->viewed_by_customer === 0)
         <div class = "modal fade bd-example-modal-sm" tabindex = "-1" 
            role = "dialog" aria-labelledby = "mySmallModalLabel" aria-hidden = "true">
            <div class = "modal-dialog modal-sm">
@@ -274,9 +274,9 @@
                         var link4= '';
 
                         if(full.file_service_id){
-                            link2 = "<a href="+window.location.origin+'/'+ full.id+'/tickets'+" class='btn btn-info' data-id='full->id' title='View a ticket for this file service'><i class='fa fa-comment'></i> </a>";
+                            link2 = "<a href="+window.location.origin+'/file_services/'+ full.id+'/tickets'+" class='btn btn-info' data-id='full->id' title='View a ticket for this file service'><i class='fa fa-comment'></i> </a>";
                         }else{ 
-                            link2 = "<a href="+window.location.origin+'/'+ full.id+'/tickets/create'+" class='btn btn-info' data-id='full->id' title='Open the ticket for this file service'><i class='fa fa-comment'></i> </a>";
+                            link2 = "<a href="+window.location.origin+'/file_services/'+ full.id+'/tickets/create'+" class='btn btn-info' data-id='full->id' title='Open the ticket for this file service'><i class='fa fa-comment'></i> </a>";
                         }
                         if(full.status == 'Open'){
                         link4 = "<a href="+window.location.origin+'/file_services/'+ full.id+'/edit'+" class='btn btn-info' data-id='full->id' title='Edit'><i class='fa fa-edit'></i> </a>";

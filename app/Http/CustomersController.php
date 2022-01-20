@@ -214,9 +214,16 @@ class CustomersController extends Controller
             }
         }
 
-        $file_services1 =  DB::table('file_services')->where([['file_services.company_id', '=', checkDomain()], ['file_services.status', '=', 'Completed'],['file_services.user_id', '=', auth()->user()->id]])
+        // $file_services1 =  DB::table('file_services')->where([['file_services.company_id', '=', checkDomain()], ['file_services.status', '=', 'Completed'],['file_services.user_id', '=', auth()->user()->id]])
+        //     ->select(DB::raw("CONCAT_WS('-',MONTH(file_services.created_at),YEAR(file_services.created_at)) as monthyear"), DB::raw('COUNT(file_services.id) as total_files'))
+        //     ->groupBy('monthyear')
+        //     ->get();
+        $from = \Carbon\Carbon::now()->subMonths(12);
+        $to = \Carbon\Carbon::now();
+            $file_services1 =  DB::table('file_services')->whereBetween('created_at', [$from, $to])->where([['file_services.company_id', '=', checkDomain()], ['file_services.status', '=', 'Completed'],['file_services.user_id', '=', auth()->user()->id]])
             ->select(DB::raw("CONCAT_WS('-',MONTH(file_services.created_at),YEAR(file_services.created_at)) as monthyear"), DB::raw('COUNT(file_services.id) as total_files'))
             ->groupBy('monthyear')
+            ->orderBy('file_services.created_at')
             ->get();
 
             $category = [];
